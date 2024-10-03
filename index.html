@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Link</title>
+    <script>
+        // Function to navigate to a Minecraft server link
+        function navigateToMinecraftServer(name, IP, port) {
+            const serverName = encodeURIComponent(name); // Encode the server name
+            const serverAddress = `${serverName}|${IP}:${port}`; // Create the server address
+            window.location.href = `minecraft://?addExternalServer=${serverAddress}`; // Set window location
+        }
+
+        // Function to handle the URL parameters
+        function handleURLParams() {
+            // Get the query string from the URL
+            const queryString = window.location.search;
+
+            // Create a URLSearchParams object
+            const urlParams = new URLSearchParams(queryString);
+
+            // Get the parameters from the URL
+            const name = urlParams.get('name');
+            const IP = urlParams.get('IP');
+            const port = urlParams.get('port');
+
+            // Check if parameters are present and redirect to the Minecraft server
+            if (name && IP && port) {
+                navigateToMinecraftServer(name, IP, port);
+            } else {
+                console.log('Missing parameters to connect to a Minecraft server');
+            }
+        }
+
+        // Call handleURLParams when the window loads
+        window.onload = handleURLParams;
+    </script>
+</head>
+<body>
+    <h1>Join a Minecraft Server</h1>
+    <p>If you have the correct parameters in the URL, you will be redirected to the Minecraft server.</p>
+</body>
+</html>
